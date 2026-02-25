@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Super Clicker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      text-align: center;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+    }
+
+    h1 {
+      margin-top: 20px;
+    }
+
+    #score {
+      font-size: 28px;
+      margin: 20px;
+    }
+
+    #clickBtn {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      background: gold;
+      transition: transform 0.1s;
+    }
+
+    #clickBtn:active {
+      transform: scale(0.9);
+    }
+
+    .shop {
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>💰 Super Clicker</h1>
+<div id="score">Coins: 0</div>
+
+<button id="clickBtn">CLICK</button>
+
+<div class="shop">
+  <h2>Shop</h2>
+  <button id="upgradeBtn" onclick="buyUpgrade()">
+  Upgrade (+1 per click) - Cost: 10
+</button>
+</div>
+
+<script>
+  let coins = 0;
+  let perClick = 1;
+  let upgradeCost = 10;
+
+  const scoreText = document.getElementById("score");
+  const clickBtn = document.getElementById("clickBtn");
+
+  // 🔹 LOAD DATA
+  function loadGame() {
+    const savedData = localStorage.getItem("superClickerSave");
+
+    if (savedData) {
+      const data = JSON.parse(savedData);
+      coins = data.coins;
+      perClick = data.perClick;
+      upgradeCost = data.upgradeCost;
+    }
+  }
+
+  // 🔹 SAVE DATA
+  function saveGame() {
+    const data = {
+      coins: coins,
+      perClick: perClick,
+      upgradeCost: upgradeCost
+    };
+
+    localStorage.setItem("superClickerSave", JSON.stringify(data));
+  }
+
+  function updateUI() {
+    scoreText.textContent = "Coins: " + coins;
+    saveGame(); // auto save every update
+  }
+
+  clickBtn.addEventListener("click", () => {
+    coins += perClick;
+    updateUI();
+  });
+
+  function buyUpgrade() {
+    if (coins >= upgradeCost) {
+      coins -= upgradeCost;
+      perClick += 1;
+      upgradeCost += 10;
+      updateUI();
+      alert("Upgrade bought! Now +" + perClick + " per click!");
+    } else {
+      alert("Not enough coins!");
+    }
+  }
+
+  // Load when page starts
+  loadGame();
+  updateUI();
+</script>
+
+</body>
+</html>
