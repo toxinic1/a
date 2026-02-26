@@ -47,6 +47,25 @@
       font-size: 16px;
       cursor: pointer;
     }
+  .popup {
+    position: absolute;
+    color: yellow;
+    font-weight: bold;
+    font-size: 20px;
+    pointer-events: none;
+    animation: floatUp 0.8s ease-out forwards;
+  }
+
+  @keyframes floatUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+  }
   </style>
 </head>
 <body>
@@ -102,11 +121,25 @@
       "Upgrade (+1 per click) - Cost: " + upgradeCost;
     saveGame();
   }
+  function showPopup(amount, x, y) {
+    const popup = document.createElement("div");
+    popup.className = "popup";
+    popup.textContent = "+" + amount;
+    popup.style.left = x + "px";
+    popup.style.top = y + "px";
 
-  clickBtn.addEventListener("click", () => {
-    coins += perClick;
-    updateUI();
-  });
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+      popup.remove();
+    }, 800);
+  }
+  clickBtn.addEventListener("click", (e) => {
+  coins += perClick;
+  updateUI();
+
+  showPopup(perClick, e.clientX, e.clientY);
+});
 
   function buyUpgrade() {
     if (coins >= upgradeCost) {
@@ -125,3 +158,4 @@
   
 </body>
 </html>
+
