@@ -66,6 +66,28 @@
       transform: translateY(-50px);
     }
   }
+  .shop-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+    padding: 15px;
+    margin: 15px;
+    border-radius: 10px;
+  }
+
+  .upgrade-left {
+    text-align: left;
+  }
+
+  .upgrade-desc {
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  #upgradeBtn {
+    min-width: 90px;
+  }
   </style>
 </head>
 <body>
@@ -75,19 +97,25 @@
 
 <button id="clickBtn">CLICK</button>
 
-<div class="shop">
-  <h2>Shop</h2>
+<div class="shop-item">
+  <div class="upgrade-left">
+    <div id="upgradeLevel">0/∞ Power Click</div>
+    <div class="upgrade-desc">+1 per upgrade</div>
+  </div>
   <button id="upgradeBtn" onclick="buyUpgrade()">
-  Upgrade (+1 per click) - Cost: 10
-</button>
+    Cost: 10
+  </button>
 </div>
 
 
 <script>
+  let upgradeLevel = 0;
   let coins = 0;
   let perClick = 1;
   let upgradeCost = 10;
 
+  const upgradeLevelText = document.getElementById("upgradeLevel");
+  const upgradeBtn = document.getElementById("upgradeBtn");
   const scoreText = document.getElementById("score");
   const clickBtn = document.getElementById("clickBtn");
   const upgradeBtn = document.getElementById("upgradeBtn");
@@ -116,10 +144,15 @@
   }
 
   function updateUI() {
-    scoreText.textContent = "Coins: " + coins;
-    upgradeBtn.textContent =
-      "Upgrade (+1 per click) - Cost: " + upgradeCost;
-    saveGame();
+  scoreText.textContent = "Coins: " + coins;
+
+  upgradeLevelText.textContent =
+    upgradeLevel + "/∞ Power Click";
+
+  upgradeBtn.textContent =
+    "Cost: " + upgradeCost;
+
+  saveGame();
   }
   function showPopup(amount, x, y) {
     const popup = document.createElement("div");
@@ -141,16 +174,17 @@
   showPopup(perClick, e.clientX, e.clientY);
 });
 
-  function buyUpgrade() {
-    if (coins >= upgradeCost) {
-      coins -= upgradeCost;
-      perClick += 1;
-      upgradeCost += 10;
-      updateUI();
-    } else {
-      alert("Not enough coins!");
-    }
+ function buyUpgrade() {
+  if (coins >= upgradeCost) {
+    coins -= upgradeCost;
+    perClick += 1;
+    upgradeLevel += 1;
+    upgradeCost += 10;
+    updateUI();
+  } else {
+    alert("Not enough coins!");
   }
+}
 
   loadGame();
   updateUI();
@@ -158,4 +192,5 @@
   
 </body>
 </html>
+
 
