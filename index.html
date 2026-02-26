@@ -121,27 +121,29 @@
 
   // 🔹 LOAD
   function loadGame() {
-    const savedData = localStorage.getItem("superClickerSave");
+  const savedData = localStorage.getItem("superClickerSave");
 
-    if (savedData) {
-      const data = JSON.parse(savedData);
-      coins = data.coins;
-      perClick = data.perClick;
-      upgradeCost = data.upgradeCost;
-    }
+  if (savedData) {
+    const data = JSON.parse(savedData);
+    coins = data.coins;
+    perClick = data.perClick;
+    upgradeCost = data.upgradeCost;
+    upgradeLevel = data.upgradeLevel || 0;
   }
+}
 
   // 🔹 SAVE
   function saveGame() {
-    const data = {
-      coins: coins,
-      perClick: perClick,
-      upgradeCost: upgradeCost
-    };
+  const data = {
+    coins: coins,
+    perClick: perClick,
+    upgradeCost: upgradeCost,
+    upgradeLevel: upgradeLevel
+  };
 
-    localStorage.setItem("superClickerSave", JSON.stringify(data));
-  }
-
+  localStorage.setItem("superClickerSave", JSON.stringify(data));
+}
+  
   function updateUI() {
   scoreText.textContent = "Coins: " + coins;
 
@@ -191,6 +193,7 @@
   
 </body>
 </html>
+
 
 
 
