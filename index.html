@@ -63,6 +63,7 @@
 </button>
 </div>
 
+
 <script>
   let coins = 0;
   let perClick = 1;
@@ -70,8 +71,9 @@
 
   const scoreText = document.getElementById("score");
   const clickBtn = document.getElementById("clickBtn");
+  const upgradeBtn = document.getElementById("upgradeBtn");
 
-  // 🔹 LOAD DATA
+  // 🔹 LOAD
   function loadGame() {
     const savedData = localStorage.getItem("superClickerSave");
 
@@ -83,7 +85,7 @@
     }
   }
 
-  // 🔹 SAVE DATA
+  // 🔹 SAVE
   function saveGame() {
     const data = {
       coins: coins,
@@ -96,7 +98,9 @@
 
   function updateUI() {
     scoreText.textContent = "Coins: " + coins;
-    saveGame(); // auto save every update
+    upgradeBtn.textContent =
+      "Upgrade (+1 per click) - Cost: " + upgradeCost;
+    saveGame();
   }
 
   clickBtn.addEventListener("click", () => {
@@ -110,16 +114,14 @@
       perClick += 1;
       upgradeCost += 10;
       updateUI();
-      alert("Upgrade bought! Now +" + perClick + " per click!");
     } else {
       alert("Not enough coins!");
     }
   }
 
-  // Load when page starts
   loadGame();
   updateUI();
 </script>
-
+  
 </body>
 </html>
