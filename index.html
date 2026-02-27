@@ -268,7 +268,7 @@
 });
 
   // 🔹 BASIC UPGRADE (if still using it)
-function buyUpgrade() {
+function buyUpgrade(button) {
   if (coins >= upgradeCost) {
     coins -= upgradeCost;
     perClick += 1;
@@ -289,7 +289,7 @@ function buyUpgrade() {
 
 
 // 🔹 POWER UPGRADE
-function buyPower() {
+function buyPower(button) {
   if (coins >= powerCost) {
     coins -= powerCost;
     perClick += 1;
@@ -310,7 +310,7 @@ function buyPower() {
 
 
 // 🔹 AUTO UPGRADE
-function buyAuto() {
+function buyAuto(button) {
   if (coins >= autoCost) {
     coins -= autoCost;
     autoIncome += 1;
@@ -331,7 +331,7 @@ function buyAuto() {
 
 
 // 🔹 MEGA UPGRADE
-function buyMega() {
+function buyMega(button) {
   if (coins >= megaCost) {
     coins -= megaCost;
     perClick += 5;
@@ -370,4 +370,5 @@ updateUI();
   
 </body>
 </html>
+
 
