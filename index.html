@@ -94,6 +94,7 @@
 
 <h1>💰 Super Clicker</h1>
 <div id="score">Coins: 0</div>
+<h3 id="incomeText">Passive Income: 0/sec</h3>
 
 <button id="clickBtn">Press me</button>
 
@@ -194,6 +195,9 @@
   autoBtn.textContent = "Cost: " + autoCost;
   megaBtn.textContent = "Cost: " + megaCost;
 
+  document.getElementById("incomeText").textContent =
+  "Passive Income: " + autoIncome + "/sec";  
+
   saveGame();
 }
   function showPopup(amount, x, y) {
@@ -289,6 +293,7 @@ updateUI();
   
 </body>
 </html>
+
 
 
 
