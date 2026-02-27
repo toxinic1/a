@@ -125,7 +125,7 @@
       <div id="powerLevel">0/∞ Power Click</div>
       <div class="upgrade-desc">+1 per upgrade</div>
     </div>
-    <button id="powerBtn" onclick="buyPower()">Cost: 10</button>
+    <button id="powerBtn" onclick="buyPower(event)">Cost: 10</button>
   </div>
 
   <!-- Auto Clicker -->
@@ -134,7 +134,7 @@
       <div id="autoLevel">0/∞ Auto Clicker</div>
       <div class="upgrade-desc">+1 coin per second</div>
     </div>
-    <button id="autoBtn" onclick="buyAuto()">Cost: 50</button>
+    <button id="autoBtn" onclick="buyAuto(event)">Cost: 50</button>
   </div>
 
   <!-- Mega Click -->
@@ -143,7 +143,7 @@
       <div id="megaLevel">0/∞ Mega Click</div>
       <div class="upgrade-desc">+5 per upgrade</div>
     </div>
-    <button id="megaBtn" onclick="buyMega()">Cost: 100</button>
+    <button id="megaBtn" onclick="buyMega(event)">Cost: 100</button>
   </div>
 
 </div>
@@ -276,7 +276,7 @@ function buyUpgrade() {
     upgradeCost += 10;
     updateUI();
     
-    showParticles(window.innerWidth / 2, window.innerHeight / 2, "✨");
+    showParticles(event.clientX, event.clientY, "✨");
   } else {
     alert("Not enough coins!");
   }
@@ -292,7 +292,7 @@ function buyPower() {
     powerCost += 10;
     updateUI();
     
-    showParticles(window.innerWidth / 2, window.innerHeight / 2, "✨");
+    showParticles(event.clientX, event.clientY, "✨");
   } else {
     alert("Not enough coins!");
   }
@@ -308,7 +308,7 @@ function buyAuto() {
     autoCost += 25;
     updateUI();
 
-    showParticles(window.innerWidth / 2, window.innerHeight / 2, "✨");
+   showParticles(event.clientX, event.clientY, "✨");
   } else {
     alert("Not enough coins!");
   }
@@ -324,7 +324,7 @@ function buyMega() {
     megaCost += 50;
     updateUI();
 
-    showParticles(window.innerWidth / 2, window.innerHeight / 2, "✨");
+    showParticles(event.clientX, event.clientY, "✨");
   } else {
     alert("Not enough coins!");
   }
@@ -350,13 +350,3 @@ updateUI();
   
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
