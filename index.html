@@ -88,6 +88,25 @@
   #upgradeBtn {
     min-width: 90px;
   }
+    
+    .particle {
+  position: fixed;
+  pointer-events: none;
+  font-weight: bold;
+  font-size: 18px;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scale(1.5);
+  }
+}
   </style>
 </head>
 <body>
@@ -158,6 +177,23 @@
   const upgradeBtn = document.getElementById("upgradeBtn");
   const scoreText = document.getElementById("score");
   const clickBtn = document.getElementById("clickBtn");
+
+  function showParticles(x, y, text = "+1") {
+  for (let i = 0; i < 6; i++) {
+    const particle = document.createElement("div");
+    particle.className = "particle";
+    particle.textContent = text;
+
+    particle.style.left = x + (Math.random() * 40 - 20) + "px";
+    particle.style.top = y + (Math.random() * 20 - 10) + "px";
+
+    document.body.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, 800);
+  }
+}
 
   // 🔹 LOAD
   function loadGame() {
@@ -239,6 +275,8 @@ function buyUpgrade() {
     upgradeLevel++;
     upgradeCost += 10;
     updateUI();
+    
+    showParticles(window.innerWidth / 2, window.innerHeight / 2, "✨");
   } else {
     alert("Not enough coins!");
   }
@@ -253,6 +291,8 @@ function buyPower() {
     powerLevel++;
     powerCost += 10;
     updateUI();
+    
+    showParticles(window.innerWidth / 2, window.innerHeight / 2, "✨");
   } else {
     alert("Not enough coins!");
   }
@@ -267,6 +307,8 @@ function buyAuto() {
     autoLevel++;
     autoCost += 25;
     updateUI();
+
+    showParticles(window.innerWidth / 2, window.innerHeight / 2, "✨");
   } else {
     alert("Not enough coins!");
   }
@@ -281,6 +323,8 @@ function buyMega() {
     megaLevel++;
     megaCost += 50;
     updateUI();
+
+    showParticles(window.innerWidth / 2, window.innerHeight / 2, "✨");
   } else {
     alert("Not enough coins!");
   }
@@ -306,6 +350,7 @@ updateUI();
   
 </body>
 </html>
+
 
 
 
