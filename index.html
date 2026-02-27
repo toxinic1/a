@@ -97,23 +97,62 @@
 
 <button id="clickBtn">Press me</button>
 
-<div class="shop-item">
-  <div class="upgrade-left">
-    <div id="upgradeLevel">0/∞ Power Click</div>
-    <div class="upgrade-desc">+1 per upgrade</div>
+<div class="shop">
+
+  <!-- Power Click -->
+  <div class="shop-item">
+    <div class="upgrade-left">
+      <div id="powerLevel">0/∞ Power Click</div>
+      <div class="upgrade-desc">+1 per upgrade</div>
+    </div>
+    <button id="powerBtn" onclick="buyPower()">Cost: 10</button>
   </div>
-  <button id="upgradeBtn" onclick="buyUpgrade()">
-    Cost: 10
-  </button>
+
+  <!-- Auto Clicker -->
+  <div class="shop-item">
+    <div class="upgrade-left">
+      <div id="autoLevel">0/∞ Auto Clicker</div>
+      <div class="upgrade-desc">+1 coin per second</div>
+    </div>
+    <button id="autoBtn" onclick="buyAuto()">Cost: 50</button>
+  </div>
+
+  <!-- Mega Click -->
+  <div class="shop-item">
+    <div class="upgrade-left">
+      <div id="megaLevel">0/∞ Mega Click</div>
+      <div class="upgrade-desc">+5 per upgrade</div>
+    </div>
+    <button id="megaBtn" onclick="buyMega()">Cost: 100</button>
+  </div>
+
 </div>
 
 
 <script>
+  let powerLevel = 0;
+  let autoLevel = 0;
+  let megaLevel = 0;
+
+  let powerCost = 10;
+  let autoCost = 50;
+  let megaCost = 100;
+
+  let autoIncome = 0;
+  
   let upgradeLevel = 0;
   let coins = 0;
   let perClick = 1;
   let upgradeCost = 10;
 
+  const powerLevelText = document.getElementById("powerLevel");
+  const autoLevelText = document.getElementById("autoLevel");
+  const megaLevelText = document.getElementById("megaLevel");
+
+  const powerBtn = document.getElementById("powerBtn");
+  const autoBtn = document.getElementById("autoBtn");
+  const megaBtn = document.getElementById("megaBtn");
+  
   const upgradeLevelText = document.getElementById("upgradeLevel");
   const upgradeBtn = document.getElementById("upgradeBtn");
   const scoreText = document.getElementById("score");
@@ -147,14 +186,16 @@
   function updateUI() {
   scoreText.textContent = "Coins: " + coins;
 
-  upgradeLevelText.textContent =
-    upgradeLevel + "/∞ Power Click";
+  powerLevelText.textContent = powerLevel + "/∞ Power Click";
+  autoLevelText.textContent = autoLevel + "/∞ Auto Clicker";
+  megaLevelText.textContent = megaLevel + "/∞ Mega Click";
 
-  upgradeBtn.textContent =
-    "Cost: " + upgradeCost;
+  powerBtn.textContent = "Cost: " + powerCost;
+  autoBtn.textContent = "Cost: " + autoCost;
+  megaBtn.textContent = "Cost: " + megaCost;
 
   saveGame();
-  }
+}
   function showPopup(amount, x, y) {
     const popup = document.createElement("div");
     popup.className = "popup";
@@ -175,11 +216,12 @@
   showPopup(perClick, e.clientX, e.clientY);
 });
 
- function buyUpgrade() {
+  // 🔹 BASIC UPGRADE (if still using it)
+function buyUpgrade() {
   if (coins >= upgradeCost) {
     coins -= upgradeCost;
     perClick += 1;
-    upgradeLevel += 1;
+    upgradeLevel++;
     upgradeCost += 10;
     updateUI();
   } else {
@@ -187,12 +229,67 @@
   }
 }
 
-  loadGame();
-  updateUI();
+
+// 🔹 POWER UPGRADE
+function buyPower() {
+  if (coins >= powerCost) {
+    coins -= powerCost;
+    perClick += 1;
+    powerLevel++;
+    powerCost += 10;
+    updateUI();
+  } else {
+    alert("Not enough coins!");
+  }
+}
+
+
+// 🔹 AUTO UPGRADE
+function buyAuto() {
+  if (coins >= autoCost) {
+    coins -= autoCost;
+    autoIncome += 1;
+    autoLevel++;
+    autoCost += 25;
+    updateUI();
+  } else {
+    alert("Not enough coins!");
+  }
+}
+
+
+// 🔹 MEGA UPGRADE
+function buyMega() {
+  if (coins >= megaCost) {
+    coins -= megaCost;
+    perClick += 5;
+    megaLevel++;
+    megaCost += 50;
+    updateUI();
+  } else {
+    alert("Not enough coins!");
+  }
+}
+
+
+// 🔹 AUTO INCOME
+setInterval(() => {
+  if (autoIncome > 0) {
+    coins += autoIncome;
+    updateUI();
+  }
+}, 1000);
+
+
+// 🔹 START GAME
+loadGame();
+updateUI();
+  
 </script>
   
 </body>
 </html>
+
 
 
 
