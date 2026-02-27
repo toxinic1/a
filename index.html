@@ -195,9 +195,11 @@
   autoBtn.textContent = "Cost: " + autoCost;
   megaBtn.textContent = "Cost: " + megaCost;
 
-  document.getElementById("incomeText").textContent =
-  "Passive Income: " + autoIncome + "/sec";  
+  document.getElementById("score").textContent =
+    "Coins: " + coins;
 
+  document.getElementById("incomeText").textContent =
+    "Passive Income: " + autoIncome + "/sec";
   saveGame();
 }
   function showPopup(amount, x, y) {
@@ -293,6 +295,7 @@ updateUI();
   
 </body>
 </html>
+
 
 
 
