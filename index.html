@@ -248,24 +248,26 @@
 
   document.getElementById("score").textContent =
     "Coins: " + coins;
-
   document.getElementById("incomeText").textContent =
     "Passive Income: " + autoIncome + "/sec";
     
-    // 🔥 Power Button
-  const powerBtn = document.getElementById("powerBtn");
-  powerBtn.textContent = "Cost: " + powerCost;
-  powerBtn.disabled = coins < powerCost;
+    
+  document.getElementById("powerBtn").textContent =
+  "Cost: " + powerCost;
+  document.getElementById("powerBtn").disabled =
+  coins < powerCost;
+    
 
-  // 🔥 Auto Button
-  const autoBtn = document.getElementById("autoBtn");
-  autoBtn.textContent = "Cost: " + autoCost;
-  autoBtn.disabled = coins < autoCost;
+  document.getElementById("autoBtn").textContent =
+  "Cost: " + autoCost;
+  document.getElementById("autoBtn").disabled =
+  coins < autoCost;
+    
 
-  // 🔥 Mega Button
-  const megaBtn = document.getElementById("megaBtn");
-  megaBtn.textContent = "Cost: " + megaCost;
-  megaBtn.disabled = coins < megaCost;
+  document.getElementById("megaBtn").textContent =
+  "Cost: " + megaCost;
+  document.getElementById("megaBtn").disabled =
+  coins < megaCost;
     
   saveGame();
 }
@@ -392,6 +394,7 @@ updateUI();
   
 </body>
 </html>
+
 
 
 
