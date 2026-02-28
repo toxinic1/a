@@ -107,6 +107,12 @@
     transform: translateY(-40px) scale(1.5);
   }
 }
+    button:disabled {
+  background-color: gray;
+  color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
   </style>
 </head>
 <body>
@@ -245,6 +251,22 @@
 
   document.getElementById("incomeText").textContent =
     "Passive Income: " + autoIncome + "/sec";
+    
+    // 🔥 Power Button
+  const powerBtn = document.getElementById("powerBtn");
+  powerBtn.textContent = "Cost: " + powerCost;
+  powerBtn.disabled = coins < powerCost;
+
+  // 🔥 Auto Button
+  const autoBtn = document.getElementById("autoBtn");
+  autoBtn.textContent = "Cost: " + autoCost;
+  autoBtn.disabled = coins < autoCost;
+
+  // 🔥 Mega Button
+  const megaBtn = document.getElementById("megaBtn");
+  megaBtn.textContent = "Cost: " + megaCost;
+  megaBtn.disabled = coins < megaCost;
+    
   saveGame();
 }
   function showPopup(amount, x, y) {
@@ -370,5 +392,6 @@ updateUI();
   
 </body>
 </html>
+
 
 
